@@ -1,0 +1,50 @@
+<div id="map" class="map" (contextmenu)="contextMenu($event)" (click)="disappearContext()">
+    <div class="layers">
+        <button (click)="setLayer('defaultMap')" class="layers__child">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAACOElEQVR4nM2WTUhVURDHf1RaiUqLNi2UKCTCZRBmi6SFLgwqWtTOXQQtWkSvRVoZQataZJ8UQUEQUps24UIQUqxoGRRKSUERpphBlmldGfhfmU7nvnd7tmhgeOeeMzP/OfNx5sF/QiuBNuA0UA9sBq4BBWAnsGwpxquBM8AnIAF+ARuAdn2n/A7oBFaVA7ILmHPGTmr/cgCS8iugOa9x8/S41gUZuKvvPcDPDBDjb0BrKYDtwFcp7AVqZHQbsAmYdQYHgG455PkIUJkFYDF97YxYPowmgDpgnzsz42VRZ3D1LJAJYLlCN1UkdKdCACvDD4HQBZ2dU9g6tD+k/d4iAImqssKD7IgIvQfW63wNMKx9+zW6F9Gx/A3KgV7lcZFOZHhjJfwGmHF7n4HVasTvbn9SzmbS1RJXD/mi9Pbr+wewVbk6DzwXn/Ug9yU8BvQDTwPvY1yQ7hPgjtY3A5kHHuQScCC43VrgYRGQF5K74QB9HyV64xbJStTosBJmnjUCK4AeYFQ99FZvmBl46UJ9VOv5AMTa4jdaFylBewFCalEODBj1Q4fyET45f+hvjIRkXjm6Lj4k2ceqvAan3xbofoyNgRjINHDFvUu7JftM5+MK1y335qV8LBIFqtQTqdCIa8aUKoGDLi9ZPFZsvjSpQr4IoBboy2E0cWylv4Ucwypttkd/2aQzLqS55jo5GjIJQlTyBjHqcjM+yWCrIktyWTM+JXuubaRaP9xWs1pFWaNZHyzp38o/owUHshrOMPhejQAAAABJRU5ErkJggg=="
+                alt="defaultMap" />
+        </button>
+        <button (click)="setLayer('satellitelMap')" class="layers__child">
+            <img src="https://img.icons8.com/ios-filled/25/null/satellite-sending-signal.png" alt="satellitelMap" />
+        </button>
+    </div>
+</div>
+
+<ul class="customContext" #menu>
+    <li (click)="activePopup()" class="customContext-element">Добавить цель</li>
+</ul>
+
+<form (ngSubmit)="addTarget(modalWindow)" *ngIf="isModalWindowActive" #modalWindow="ngForm" class="modalWindow">
+    <h1>Добавить корабль</h1>
+    <input [(ngModel)]="formData.title" #title="ngModel" name="title" type="text" placeholder="Название метки"
+        required />
+    <div *ngIf="title.invalid && title.touched">
+        <div class="error" *ngIf="title.errors?.required"> Поле обязательно к заполнению </div>
+        <div class="error" *ngIf="title.errors?.incorrectTitle"> {{title.errors?.incorrectTitle}} </div>
+    </div>
+
+    <input [(ngModel)]="formData.speed" #speed="ngModel" name="speed" type="number" placeholder="Скорость" min="1"
+        required />
+    <div *ngIf="speed.invalid && speed.touched">
+        <div class="error" *ngIf="speed.errors?.required"> Поле обязательно к заполнению </div>
+        <div class="error" *ngIf="speed.errors?.min"> Минимальная скорость - 1 </div>
+    </div>
+
+    <input [(ngModel)]="formData.well" #well="ngModel" name="well" type="number" placeholder="Курс" min="0" max="360"
+        required />
+    <div *ngIf="well.invalid && well.touched">
+        <div class="error" *ngIf="well.errors?.required"> Поле обязательно к заполнению </div>
+        <div class="error" *ngIf="well.errors?.max || well.errors?.min"> Введите корректный курс! </div>
+    </div>
+
+    <button [disabled]="!modalWindow.valid" type="submit">Добавить корабль</button>
+</form>
+
+<div #popup class="ol-popup">
+    <h1>Метка</h1>
+    <h3>Название судна: <span class="popup-content">{{popupData.title}}</span></h3>
+    <h3>Широта: <span class="popup-content">{{popupData.latitude}}</span></h3>
+    <h3>Долгота: <span class="popup-content">{{popupData.longitude}}</span></h3>
+    <h3>Курс: <span class="popup-content">{{popupData.well}}°</span></h3>
+    <h3>Скорость судна: <span class="popup-content">{{popupData.speed}} уз.</span></h3>
+</div>
