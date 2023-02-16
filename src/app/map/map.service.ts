@@ -14,27 +14,27 @@ import { newVectorLayersProps } from 'src/types';
   providedIn: 'root'
 })
 export class MapService {
-
-  satellitelMap = new TileLayer({
-    source: new OSM({
-      url: 'https://api.maptiler.com/tiles/satellite/{z}/{x}/{y}.jpg?key=kDDc3ZruCL6UrC8cD4bp',
+  defaultLayers = [
+    new TileLayer({
+      source: new OSM({
+        url: 'https://api.maptiler.com/tiles/satellite/{z}/{x}/{y}.jpg?key=kDDc3ZruCL6UrC8cD4bp',
+      }),
+      visible: false,
+      properties: {
+        title: "satellitelMap"
+      }
     }),
-    visible: false,
-    properties: {
-      title: "satellitelMap"
-    }
-  })
-
-  defaultMap = new TileLayer({
-    source: new OSM(),
-    visible: true,
-    properties: {
-      title: "defaultMap"
-    }
-  })
+    new TileLayer({
+      source: new OSM(),
+      visible: true,
+      properties: {
+        title: "defaultMap"
+      }
+    })
+  ]
 
   getDefaultLayers() {
-    return [this.satellitelMap, this.defaultMap]
+    return this.defaultLayers
   }
 
   createNewVectorLayer(data: newVectorLayersProps) {
@@ -50,7 +50,6 @@ export class MapService {
       }),
       style: new Style({
         image: new Icon({
-          anchor: [0.5, 1],
           crossOrigin: 'anonymous',
           src: 'https://i.ibb.co/G7rsG7Z/icons8-location-50-2.png',
           rotation: well * 0.0174533,

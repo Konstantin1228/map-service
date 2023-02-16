@@ -16,7 +16,7 @@
 
 <form (ngSubmit)="addTarget(modalWindow)" *ngIf="isModalWindowActive" #modalWindow="ngForm" class="modalWindow">
     <h1>Добавить корабль</h1>
-    <input [(ngModel)]="formData.title" #title="ngModel" name="title" type="text" placeholder="Название метки"
+    <input [(ngModel)]="formData.title" #title="ngModel" name="title" type="text" placeholder="Название корабля"
         required />
     <div *ngIf="title.invalid && title.touched">
         <div class="error" *ngIf="title.errors?.required"> Поле обязательно к заполнению </div>
@@ -30,14 +30,14 @@
         <div class="error" *ngIf="speed.errors?.min"> Минимальная скорость - 1 </div>
     </div>
 
-    <input [(ngModel)]="formData.well" #well="ngModel" name="well" type="number" placeholder="Курс" min="0" max="360"
+    <input [(ngModel)]="formData.well" #well="ngModel" name="well" type="number" placeholder="Курс" min="0" max="359"
         required />
     <div *ngIf="well.invalid && well.touched">
         <div class="error" *ngIf="well.errors?.required"> Поле обязательно к заполнению </div>
         <div class="error" *ngIf="well.errors?.max || well.errors?.min"> Введите корректный курс! </div>
     </div>
 
-    <button [disabled]="!modalWindow.valid" type="submit">Добавить корабль</button>
+    <button [disabled]="!modalWindow.valid" type="submit">Ок</button>
 </form>
 
 <div #popup class="ol-popup">

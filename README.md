@@ -1,27 +1,19 @@
-# Testovoe
+# Тестовое задание 
+#### Деплой :https://map-service-n3sql5ks4-konstantin1228.vercel.app/
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4.
+## Описание функционала
+### У карты контекстное меню с одним пунктом «добавить цель». При нажатии на него открывается модальное окно с вводом названия, скорости и курса.
+### При клике на кнопку "Ок" цель появляется на карте в виде капельки, смотрящей острым концом в сторону заданного курса.
+### При наведении мыши всплывает подсказка с 5 параметрами: название судна, широта, долгота, курс, скорость.
 
-## Development server
+## Запуск приложения
+### Версия ноды должна быть от 16.15.0
+### Запустить приложение нужно с помощью команды `npm run start` и перейти на адрес http://localhost:4200/
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Запуск приложения
+### Версия ноды должна быть от 16.15.0
+### Запустить приложение нужно с помощью команды `npm run start` и перейти на адрес http://localhost:4200/
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Технологии, используемые в работе :
+### Angular 15
+### Openlayers

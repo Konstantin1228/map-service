@@ -54,7 +54,6 @@ export class MapComponent implements AfterViewInit {
     if (!isUniqueName) return
     formEvent.reset()
     this.isModalWindowActive = false
-    // this.menu.nativeElement.style.display = "none"
 
     const newMarker = this.MapService.createNewVectorLayer({
       vectorPosition: this.currentPosition,
@@ -85,7 +84,7 @@ export class MapComponent implements AfterViewInit {
 
   activePopup() {
     this.menu.nativeElement.style.display = "none"
-    this.isModalWindowActive = !this.isModalWindowActive
+    this.isModalWindowActive = true
   }
 
   disappearContext() {
@@ -98,12 +97,12 @@ export class MapComponent implements AfterViewInit {
       element: this.popup.nativeElement,
     });
 
-    const layers = this.MapService.getDefaultLayers()
+    const defaultLayers = this.MapService.getDefaultLayers()
 
     this.map = new Map({
       layers: [
         new LayerGroup({
-          layers
+          layers: defaultLayers
         })
       ],
       overlays: [overlay],
